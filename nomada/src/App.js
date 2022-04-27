@@ -1,8 +1,9 @@
 import './App.css';
-
+import DragAndDrop from './components/DragAndDrop'
 function App() {
   return (
-    <div className="App">      
+    <div className="App">   
+    <DragAndDrop />  
     </div>
   );
 }
