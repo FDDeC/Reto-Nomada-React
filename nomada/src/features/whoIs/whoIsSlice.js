@@ -6,6 +6,7 @@ const whoIsSlice = createSlice({
     actorDetails: [],
     logRequests: [],
     requesting: false,
+    historySearch: []
   },
   reducers: {
     logRequest(state, action) {
@@ -16,8 +17,14 @@ const whoIsSlice = createSlice({
     startRequest(state) {
       state.requesting = true
     },
+    addHistoryItem(state, action) {      
+      state.historySearch.push(action.payload)
+    },
+    removeHistoryItem(state, action) {      
+      state.historySearch = state.historySearch.filter(i => i.uid !== action.payload)
+    }
   },
 });
 
-export const { logRequest, startRequest } = whoIsSlice.actions;
+export const { logRequest, startRequest, addHistoryItem, removeHistoryItem } = whoIsSlice.actions;
 export default whoIsSlice.reducer;

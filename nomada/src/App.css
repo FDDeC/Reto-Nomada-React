@@ -1,15 +1,15 @@
 .App {
-  text-align: center;
-}
-
-.App-header {
+  margin:5vh;
   background-color: #ffffff;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.deleteIcon {
+  color: red;
+  font-size: 20pt;
+}
+.deleteIcon :hover {
+  color: red;
+  font-size: 24pt;
+}
