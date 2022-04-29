@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Skeleton, List, Image, Tag, Button } from "antd";
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
 const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 
 function ActorDetails() {
   const details = useSelector((state) => state.whoIs.actorDetails);
   const params = useParams();
-  const [initLoading, setInitLoading] = useState(false);
+  //const [initLoading, setInitLoading] = useState(false);
   const historySearch = useSelector(state => state.whoIs.historySearch)
   const navigate = useNavigate()
   useEffect(() => {    
@@ -47,7 +47,7 @@ function ActorDetails() {
       <Col style={{padding:"5px"}} xs={24} sm={16} md={18}>
         {/* <h3>Películas:</h3> */}
         <List
-          loading={initLoading}
+          //loading={initLoading}
           itemLayout="horizontal"
           pagination={{
             onChange: (page) => {
