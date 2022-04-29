@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import HistorySearch from './HistorySearch';
 import "antd/dist/antd.css";
 import { Upload, message, Spin } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addHistoryItem,
-  removeHistoryItem,
-} from "../features/whoIs/whoIsSlice";
+import { useNavigate } from "react-router-dom";
+import { addHistoryItem } from "../features/whoIs/whoIsSlice";
 const { Dragger } = Upload;
 const whoIsUrl = process.env.REACT_APP_API_WHOIS_URL;
 const whoIsKey = process.env.REACT_APP_API_WHOIS_KEY;
 const movieDbUrl = process.env.REACT_APP_API_MOVIEDB_PERSON;
-const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
+//const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 const movieDbKey = process.env.REACT_APP_API_MOVIEDB_KEY;
 
 async function getActorDetails(data) {
@@ -26,25 +25,20 @@ async function getActorDetails(data) {
       // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //body: JSON.stringify(data) // body data type must match "Content-Type" header
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url    
   });
   return response.json(); // parses JSON response into native JavaScript objects    
   } catch (error) {
     console.log(error)
     return {error:error}
-  }
-  
+  }  
 }
 
 function DragAndDrop() {
   const dispatch = useDispatch();
   const historySearch = useSelector((state) => state.whoIs.historySearch);
   const [working, setWorking] = useState(false);
-
-  // useEffect(() => {
-  //   console.log(working);
-  // }, [working]);
+  const navigate = useNavigate()
 
   async function getActorData(info) {
     try {
@@ -55,11 +49,13 @@ function DragAndDrop() {
       }
       dispatch(addHistoryItem(history))
       setWorking(false);
+      navigate(`/actor/${actorDetails.results[0].id}`)
+      message.destroy()
     } catch (error) {
       console.log(info, error);
     }
   }
-
+ 
   const props = {
     name: "file",
     disabled: working,
@@ -70,8 +66,7 @@ function DragAndDrop() {
     headers: { nomada: whoIsKey },
     onChange(info) {
       const { status } = info.file;
-      if (status === "uploading") {
-        //console.log(info.file, info.fileList);
+      if (status === "uploading") {        
         setWorking(true);
       }
       if (status === "done") {
@@ -80,7 +75,7 @@ function DragAndDrop() {
           message.error(`${info.file.response.error}.`);
         } else {
           message.success(
-            `Detectamos a ${info.file.response.actorName} , aguarde mientras consultamos sobre sus trabajos...`
+            `Detectamos a ${info.file.response.actorName}! , obteniendo datos, aguarde...`
           );
           if (
             !historySearch.find((i) => i.title === info.file.response.actorName)
@@ -97,14 +92,17 @@ function DragAndDrop() {
       }
     },
     onRemove(e) {      
-      console.log("Removing",e);
+      //console.log("Removing", e);
+      message.destroy()
     },
     onDrop(e) {
-      console.log("Dropped files", e.dataTransfer.files);
+      setWorking(true)
+      //console.log("Dropped files", e.dataTransfer.files);
     },
   };
 
   return (
+    <>
     <Dragger {...props}>
       {working ? (
         <Spin tip="Procesando..." />
@@ -120,6 +118,10 @@ function DragAndDrop() {
         En caso detectemos una persona del cine en la foto te diremos quién es y cuales fueron sus trabajos
       </p>
     </Dragger>
+      <HistorySearch />
+      {/* <ActorDetails /> */}
+      </>
+
   );
 }
 

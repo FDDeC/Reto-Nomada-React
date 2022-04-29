@@ -19,12 +19,13 @@ const whoIsSlice = createSlice({
     },
     addHistoryItem(state, action) {      
       state.historySearch.push(action.payload)
+      state.actorDetails = action.payload.data
     },
-    removeHistoryItem(state, action) {      
-      state.historySearch = state.historySearch.filter(i => i.uid !== action.payload)
+    deleteHistoryItem(state, action) {      
+      state.historySearch = state.historySearch.filter(i => i.data.id !== action.payload)
     }
   },
 });
 
-export const { logRequest, startRequest, addHistoryItem, removeHistoryItem } = whoIsSlice.actions;
+export const { logRequest, startRequest, addHistoryItem, deleteHistoryItem } = whoIsSlice.actions;
 export default whoIsSlice.reducer;
