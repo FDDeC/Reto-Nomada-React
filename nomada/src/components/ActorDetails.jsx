@@ -19,7 +19,7 @@ function ActorDetails() {
   return (
     <>
       <Col style={{ padding: "5px", textAlign: "center" }} xs={10} sm={8} md={6}><Link to="/">
-        <Button style={{width:"100%", minWidth:"100px", maxWidth:"170px"}} type="primary" icon={<ArrowLeftOutlined />}>
+        <Button style={{width:"100%", minWidth:"100px", maxWidth:"230px"}} type="primary" icon={<ArrowLeftOutlined />}>
           Regresar
         </Button>
       </Link></Col>  
@@ -32,7 +32,7 @@ function ActorDetails() {
             <Image
               style={{
                 minWidth: "100px",
-                maxHeight: "250px",                
+                maxHeight: "350px",                
           minHeight:"150px"}}
               src={`${movieDbImg}w500${details.profile_path}`}
             />
@@ -44,7 +44,7 @@ function ActorDetails() {
           </Col>
         </Row>
       </Col>
-      <Col xs={24} sm={16} md={18}>
+      <Col style={{padding:"5px"}} xs={24} sm={16} md={18}>
         {/* <h3>Películas:</h3> */}
         <List
           loading={initLoading}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import 'antd/dist/antd.css';
-import { List, Avatar, Button, Image } from 'antd';
+import { List, Avatar, Button, Image, Row } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
-import { DeleteOutlined } from "@ant-design/icons";
+import { CloseOutlined } from "@ant-design/icons";
 import { deleteHistoryItem } from "../features/whoIs/whoIsSlice";
 const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 
@@ -17,17 +17,24 @@ function HistorySearch() {
 
   return (
   <List
-      itemLayout="horizontal"
+      grid={{
+      gutter: 16,
+      xs: 1,
+        sm: 2,
+      md: 2,
+      lg: 2,
+      xl: 2,
+      xxl: 2
+      }}      
       locale={{ emptyText: "No existen registros" }}
-      dataSource={data}
+      dataSource={data}      
       renderItem={item => (
-      <List.Item        
-        actions={[<DeleteOutlined className="deleteIcon" key={ item.data.id } onClick={()=> removeItem(item.data.id) } />] }>        
+      <List.Item>        
           <List.Item.Meta
-            onClick={()=>navigate(`/actor/${item.data.id}`)}
-            avatar={<Image preview={ false } height={80} src={ `${movieDbImg}w200${item.data.profile_path}` }/>}
-          title={<Link to={`/actor/${item.data.id}`}>{item.title}</Link> }
-          description={"Trabajos: " + item.data.known_for.map(mn=>` ${mn.original_title}`)}
+            
+            avatar={<Image onClick={() => navigate(`/actor/${item.data.id}`)} preview={false} height={80} src={`${movieDbImg}w200${item.data.profile_path}`} />}
+            title={<Row style={{ display: "flex", justifyContent: "space-between", paddingRight: "20px" }}><Link to={`/actor/${item.data.id}`}>{item.title}</Link><CloseOutlined className="deleteIcon" key={item.data.id} onClick={() => removeItem(item.data.id)} /></Row>}
+            description={<p onClick={() => navigate(`/actor/${item.data.id}`)}>{"Trabajos: " + item.data.known_for.map(mn => ` ${mn.original_title}`)}</p>}
         />
       </List.Item>
     )}

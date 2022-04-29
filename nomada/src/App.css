@@ -6,10 +6,8 @@
   color: white;
 }
 .deleteIcon {
-  color: red;
-  font-size: 20pt;
+  font-size: 15pt;
 }
 .deleteIcon :hover {
-  color: red;
-  font-size: 24pt;
+  color: red;  
 }
