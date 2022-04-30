@@ -71,8 +71,6 @@ Crear una interfaz hecha con react que conecte varias APIs para lograr saber com
 
 ## Instalación:
 
-Dentro de la carpeta "nomada"
-
 - crear un archivo llamado: `.env` que tenga la siguiente forma:
 
 ```
