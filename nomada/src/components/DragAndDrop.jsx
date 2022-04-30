@@ -5,7 +5,7 @@ import { Upload, message, Spin } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addHistoryItem } from "../features/whoIs/whoIsSlice";
+import { addHistoryItem, setActorDetails } from "../features/whoIs/whoIsSlice";
 const { Dragger } = Upload;
 const whoIsUrl = process.env.REACT_APP_API_WHOIS_URL;
 const whoIsKey = process.env.REACT_APP_API_WHOIS_KEY;
@@ -41,11 +41,12 @@ function DragAndDrop() {
   const navigate = useNavigate()
 
   async function getActorData(info) {
-    try {
+    try {      
       const actorDetails = await getActorDetails(info);
       let history = {
         title: info.file.response.actorName,
-        data: actorDetails.results[0]
+        data: actorDetails.results[0],
+        //img: info.file
       }
       dispatch(addHistoryItem(history))
       setWorking(false);
@@ -67,23 +68,23 @@ function DragAndDrop() {
     onChange(info) {
       const { status } = info.file;
       if (status === "uploading") {        
-        setWorking(true);
+        setWorking(true);        
       }
       if (status === "done") {
         if (info.file.response.error.length) {
           setWorking(false)
           message.error(`${info.file.response.error}.`);
         } else {
-          message.success(
-            `Detectamos a ${info.file.response.actorName}! , obteniendo datos, aguarde...`
-          );
-          if (
-            !historySearch.find((i) => i.title === info.file.response.actorName)
-          ) {            
-            getActorData(info);
-          } else {
+          let checkHistory = historySearch.find((i) => i.title === info.file.response.actorName)
+          if (checkHistory) {             
             setWorking(false);
-            console.log("ya se encuentra en nuestro historial");
+            dispatch(setActorDetails(checkHistory.data.id))
+            navigate(`/actor/${checkHistory.data.id}`)
+          } else {
+            message.success(
+              `Detectamos a ${info.file.response.actorName}! , obteniendo datos, aguarde...`
+            );
+            getActorData(info);
           }
         }
       } else if (status === "error") {

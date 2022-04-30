@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import { Row, Col, Skeleton, List, Image, Tag, Button } from "antd";
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { setActorDetails } from "../features/whoIs/whoIsSlice";
 const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 
 function ActorDetails() {
   const details = useSelector((state) => state.whoIs.actorDetails);
-  const params = useParams();
-  //const [initLoading, setInitLoading] = useState(false);
+  const dispatch = useDispatch();
+  const params = useParams();  
   const historySearch = useSelector(state => state.whoIs.historySearch)
   const navigate = useNavigate()
   useEffect(() => {    
     if (!historySearch.find(hs => String(hs.data.id) === params.id)) {
       navigate("/")
+    } else {
+      if (params.id !== String(details.id)) {
+        dispatch(setActorDetails(parseInt(params.id)))
+      }
     }    
-  }, [params, historySearch,navigate]);
+  }, [params, historySearch, navigate, details, dispatch]);
   return (
     <>
       <Col style={{ padding: "5px", textAlign: "center" }} xs={10} sm={8} md={6}><Link to="/">

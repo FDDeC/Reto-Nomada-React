@@ -1,4 +1,5 @@
 import {  
+  Navigate,
   Routes,
   Route
 } from "react-router-dom";
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<DragAndDrop />} />
         <Route path="/actor/:id" element={<ActorDetails />} />
-        <Route path='*' element={ <>Not Found</> } />
+        <Route path='*' element={ <Navigate to="/" replace /> } />
       </Routes>
     </div>
   );

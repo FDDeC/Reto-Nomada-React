@@ -3,29 +3,22 @@ import { createSlice } from "@reduxjs/toolkit";
 const whoIsSlice = createSlice({
   name: "whoIs",
   initialState: {
-    actorDetails: [],
-    logRequests: [],
-    requesting: false,
+    actorDetails: [],    
     historySearch: []
   },
   reducers: {
-    logRequest(state, action) {
-      state.logRequests = [...state.logRequests, action.payload.log]
-      state.actorDetails = [action.payload.details]
-      state.requesting = false
-    },
-    startRequest(state) {
-      state.requesting = true
-    },
     addHistoryItem(state, action) {      
       state.historySearch.push(action.payload)
       state.actorDetails = action.payload.data
     },
     deleteHistoryItem(state, action) {      
       state.historySearch = state.historySearch.filter(i => i.data.id !== action.payload)
+    },
+    setActorDetails(state, action) {
+      state.actorDetails = state.historySearch.find(hs=> hs.data.id === action.payload ).data
     }
   },
 });
 
-export const { logRequest, startRequest, addHistoryItem, deleteHistoryItem } = whoIsSlice.actions;
+export const { addHistoryItem, deleteHistoryItem, setActorDetails } = whoIsSlice.actions;
 export default whoIsSlice.reducer;
