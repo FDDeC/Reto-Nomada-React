@@ -21,6 +21,15 @@ function ActorDetails() {
       }
     }    
   }, [params, historySearch, navigate, details, dispatch]);
+
+  function formatDate(dateString) {
+    let dateObject = new Date(dateString);
+    return dateObject.toLocaleString("es-AR", {
+    timeZone: 'UTC',
+    hour12: false, dateStyle:"long"
+    });   
+  }
+
   return (
     <>
       <Col style={{ padding: "5px", textAlign: "center" }} xs={10} sm={8} md={6}><Link to="/">
@@ -63,30 +72,29 @@ function ActorDetails() {
           }}
           dataSource={details.known_for}
           renderItem={(item) => (
-            <List.Item>
-              <Skeleton avatar title={false} loading={item.loading} active>
+            <List.Item>             
                 <List.Item.Meta
-                  avatar={
-                    <Image
-                      height={150}
-                      src={`${movieDbImg}w500${item.poster_path}`}
-                    />
-                  }
-                  title={
-                    <Row
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        paddingRight:"10px"
-                      }}
-                    >
-                      <h3>{item.original_title}</h3>
-                      <h4>{item.vote_average}</h4>
-                    </Row>
-                  }
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                avatar={
+                  <Image
+                    height={150}
+                    src={`${movieDbImg}w500${item.poster_path}`}
+                  />
+                }
+                title={
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      paddingRight: "10px"
+                    }}
+                  >
+                    <h2>{item.original_title}</h2>
+                    <h4>Pt. {item.vote_average}/10</h4>
+                  </Row>
+                }
+                description={<><p>{item.overview}</p><p><b>Fecha de estreno:{formatDate(item.release_date)}</b></p></>}
                 />
-              </Skeleton>
+              
             </List.Item>
           )}
         />

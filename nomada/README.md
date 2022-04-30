@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+# Reto Nomada
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Problema:
 
-## Available Scripts
+No saber cómo se llama un actor ni las películas en las que ha trabajado, sólo cuentas con una foto.
 
-In the project directory, you can run:
+## Solución solicitada:
 
-### `npm start`
+Crear una interfaz hecha con react que conecte varias APIs para lograr saber como se llama un actor y sus películas. Tendrás que hacer dos peticiones, una para saber que actor es el de una imagen y después buscar por el nombre los datos de este.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+\*Con ayuda de un sistema de diseño como ant o material design crear una interface similar.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+\*Debo poder arrastrar un archivo de imagen o poder elegirlo desde el explorador de archivos del sistema.
 
-### `npm test`
+\*Solo debo poder arrastrar o seleccionar un archivo.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+\*Solo debe aceptar archivos de imagen tipo jpg o png, la extensión puede estar en mayusculas o minúsculas, debes aceptar ambas.
 
-### `npm run build`
+\*Primero debes subir la imagen a nuestra API para obtener el nombre del actor que aparece en la imagen.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+\*Una vez tengas el nombre del actor debes consultar la API de “The movie Database”.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+\*Dibujar la información de la izquierda:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Foto del actor.
+- Género del actor.
+- Nombre del actor.
+- Popularidad.
+- Películas en las que ha participado:
+  - Nombre de la película.
+  - Foto de la película.
+  - Descripción de la película.
+  - Fecha en la que se estrenó.
+  - Valoración de la película.
 
-### `npm run eject`
+\*Debe haber un botón para reiniciar el proceso. (El diseño de la izquierda es sugerido, si no quieres no se tiene que ver así)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tecnologias utilizadas:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Javascript
+- React
+- Redux-toolkit
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Construir una App utlizando React, Redux.
+- Utilizar componente arrastrar y soltar de ANT Design para determinar si en la imagen existe una persona del cine.
+  -Mostrar los detalles del resultado obtenido.
+  En `nomada` crear un archivo llamado: `.env` que tenga la siguiente forma:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+REACT_APP_API_WHOIS_KEY = ELVALORDESUKEY
+REACT_APP_API_WHOIS_URL = https://whois.nomada.cloud/upload
+REACT_APP_API_MOVIEDB_PERSON = https://api.themoviedb.org/3/search/person
+REACT_APP_API_MOVIEDB_IMG = https://image.tmdb.org/t/p/
+REACT_APP_API_MOVIEDB_KEY = ELVALORDESUKEY
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Reemplazar `REACT_APP_API_MOVIEDB_KEY` y `REACT_APP_API_WHOIS_KEY` con tus propias credenciales para conectarte.

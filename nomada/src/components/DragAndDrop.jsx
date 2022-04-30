@@ -15,7 +15,7 @@ const movieDbKey = process.env.REACT_APP_API_MOVIEDB_KEY;
 
 async function getActorDetails(data) {
   try {
-    const response = await fetch(`${movieDbUrl}?api_key=${movieDbKey}&query=${encodeURI(data.file.response.actorName)}`, {
+    const response = await fetch(`${movieDbUrl}?api_key=${movieDbKey}&language=es-AR&query=${encodeURI(data.file.response.actorName)}`, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
