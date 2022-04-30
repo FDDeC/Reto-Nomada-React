@@ -3,7 +3,7 @@ import { Row, Col, List, Image, Tag, Button } from "antd";
 import { ArrowLeftOutlined, StarFilled } from '@ant-design/icons';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { setActorDetails } from "../features/whoIs/whoIsSlice";
+import { setActorDetails } from "../slices/whoIs";
 const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 
 function ActorDetails() {

@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { List, Image, Row } from 'antd';
 import { useSelector, useDispatch } from 'react-redux'
 import { CloseOutlined } from "@ant-design/icons";
-import { deleteHistoryItem } from "../features/whoIs/whoIsSlice";
+import { deleteHistoryItem } from "../slices/whoIs";
 const movieDbImg = process.env.REACT_APP_API_MOVIEDB_IMG;
 
 function HistorySearch() {

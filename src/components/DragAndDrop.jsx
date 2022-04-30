@@ -5,7 +5,7 @@ import { Upload, message, Spin } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addHistoryItem, setActorDetails } from "../features/whoIs/whoIsSlice";
+import { addHistoryItem, setActorDetails } from "../slices/whoIs";
 const { Dragger } = Upload;
 const whoIsUrl = process.env.REACT_APP_API_WHOIS_URL;
 const whoIsKey = process.env.REACT_APP_API_WHOIS_KEY;

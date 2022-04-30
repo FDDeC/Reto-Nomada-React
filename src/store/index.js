@@ -10,7 +10,7 @@
 
 // export default store;
 import { configureStore } from '@reduxjs/toolkit'
-import whoIsSlice from '../features/whoIs/whoIsSlice'
+import whoIsSlice from '../slices/whoIs'
 
 const store = configureStore({
   reducer: {
